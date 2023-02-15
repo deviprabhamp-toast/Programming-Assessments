@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Employee {
+public class Employee {
     private int empId;
     private String name;
     private String department;
@@ -122,4 +122,3 @@ class Employee {
         System.out.println("Difference in salary before and after allowance: Rs. "+String.format("%.2f",salary - salaryBeforeAllowance));
     }
 }
-
