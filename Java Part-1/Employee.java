@@ -1,68 +1,114 @@
+import java.util.Scanner;
+
 class Employee {
-    private int empID;
+    private int empId;
     private String name;
     private String department;
     private String designation;
     private double salary;
-    static int idCount = 1001;
+    private static int idCount = 1001;
+    Scanner sin = new Scanner(System.in);
 
-    // Employee class parameterized constructor
-    Employee(String name, String department, String designation, double salary)
+    public Employee(String name, String department, String designation, double salary)
     {
-        this.empID = idCount++;
+        this.empId = idCount++;
         this.name = name;
         this.department = department;
         this.designation = designation;
         this.salary = salary;
     }
-    public int GetEmpId()
-    {
-        return empID;
+    public Employee(){
+        empId = idCount++;
     }
-    public void SetEmpId(int id)
+
+    public int getId()
     {
-        empID = id;
+        return empId;
     }
-    public String GetEmpName()
+    public void setId(int id)
+    {
+        empId = id;
+    }
+    public String getName()
     {
         return name;
     }
-    public void SetEmpName(String ename)
+    public void setName(String employeeName)
     {
-        name = ename;
+        while(!(employeeName.matches("[a-zA-Z][a-zA-Z .]*[a-zA-Z]+")) || (employeeName.length()<3))
+        {
+            System.out.println("Please re-enter the name correctly:");
+            employeeName = sin.nextLine();
+        }
+        name = employeeName;
     }
-    public String GetDepartment()
+    public String getDepartment()
     {
         return department;
     }
-    public void SetDepartment(String dept)
+    public void setDepartment(String departmentNum)
     {
-        department = dept;
+        String departments[] = {"Research & Development", "IT", "Admin", "HR", "Accounts"};
+        Scanner sin = new Scanner(System.in);
+        while(!(departmentNum.matches("[1-5]")))
+        {
+            System.out.println("Select department number:\n \t1 - Research & Development\n \t2 - IT\n \t3 - Admin\n \t4 - HR\n \t5 - Accounts");
+            System.out.println("Please select one from the above options:");
+            departmentNum = sin.nextLine();
+        }
+        int deptNumber = Integer.parseInt(departmentNum);
+        department = departments[deptNumber-1];
     }
-    public String GetDesignation()
+    public String getDesignation()
     {
         return designation;
     }
-    public void SetDesignation(String desg)
+    public void setDesignation(String desgNum)
     {
-        designation = desg;
+        String designations[] = {"Accountant", "Manager", "QA Engineer", "Network Admin", "Software developer"};
+        Scanner sin = new Scanner(System.in);
+        while(!(desgNum.matches("[1-5]")))
+        {
+            System.out.println("Select designation:\n \t1 - Accountant\n \t2 - Manager\n \t3 - QA Engineer\n \t4 - Network Admin\n \t5 - Software developer");
+            System.out.println("Please select one from the above options:");
+            desgNum = sin.nextLine();
+        }
+        int desgNumber = Integer.parseInt(desgNum);
+        designation = designations[desgNumber-1];
     }
-    public double GetSalary()
+
+    public double getSalary()
     {
         return salary;
     }
-    public void SetSalary(double sal)
+    public void setSalary(String inputSalary)
     {
-        salary = sal;
+        boolean validSalary = false;
+        while(!validSalary)
+        {
+            try{
+                salary = Double.parseDouble(inputSalary);
+                validSalary = true;
+                if(salary < 500)
+                {
+                    validSalary = false;
+                    System.out.println("Salary should be Rs. 500 or above...Enter again ");
+                    inputSalary = sin.nextLine();
+                }
+            }
+            catch(Exception e)
+            {
+                validSalary = false;
+                System.out.println("Invalid salary....Enter again");
+                inputSalary = sin.nextLine();
+            }
+        }
     }
-
-
-    public String ToString()
+    public String toString()
     {
-        return "| ID: "+empID+" |  Name: "+name+" |  Department: "+department+" |  Designation: "+designation+" |  Salary: Rs. "+salary+"  |";
+        return "| ID: "+empId+" |  Name: "+name+" |  Department: "+department+" |  Designation: "+designation+" |  Salary: Rs. "+salary+"  |";
     }
-
-    public void SetAllowance()
+    public void setAllowance()
     {
         double salaryBeforeAllowance = salary;
         if(designation.compareTo("Manager") == 0)
