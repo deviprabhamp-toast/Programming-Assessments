@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 public class TestEmployee {
-    public static ArrayList<Employee> employeeList = new ArrayList<>();
     public static void main(String[] args) {
         Scanner sin = new Scanner(System.in);
         String name, designationNum, departmentNum, salary;
-        int noOfEmployees;
         String choice = "y";
+        String attendanceChoice;
+        ArrayList<Employee> employeeList = new ArrayList<>();
 
         while(choice.equals("y"))
         {
@@ -34,11 +34,24 @@ public class TestEmployee {
                 choice = sin.nextLine();
             }
         }
-        noOfEmployees = employeeList.size();
-        for(int i=0; i<noOfEmployees; i++){
-            System.out.println(employeeList.get(i).toString());
-            employeeList.get(i).setAllowance();
-            System.out.println("***********************************************************************************************");
+
+        System.out.println("MASTER DATA:");
+        MasterData employeeData = new MasterData(employeeList);
+        employeeData.displayEmployees();
+
+        //Attendance
+        System.out.println("Do you want to make attendance entry for employees? \n\tPress 'y' (yes) to add\n\tPress 'n' (no) to stop");
+        attendanceChoice = sin.nextLine();
+        while(!(attendanceChoice.equals("y")) && !(attendanceChoice.equals("n")))
+        {
+            System.out.println("Please press a valid one:\n\t'y' - Enter attendance\n\t'n' - Stop");
+            attendanceChoice = sin.nextLine();
+        }
+        if(attendanceChoice.equals("y"))
+        {
+            AttendanceMaster attendance = new AttendanceMaster();
+            attendance.enterAttendance(employeeList);
+            attendance.showEligibleList();
         }
     }
 }
