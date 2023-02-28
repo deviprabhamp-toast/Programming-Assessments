@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Scanner;
+import java.util.Set;
 
 public class AttendanceMaster{
     private LinkedHashMap<Employee,Integer> employeeAttendance = new LinkedHashMap<>();
@@ -40,14 +43,16 @@ public class AttendanceMaster{
         else
         {
             System.out.println("Enter the employee attendance details:");
-            for (int i=attendanceCount; i<noOfEmployees; i++) {
-                System.out.println("Employee Details:");
-                System.out.println(employees.get(i).toString());
-                System.out.println("Enter the number of working days for the employee:");
-                noOfWorkingDays = sin.nextLine();
-                days = checkValidDays(noOfWorkingDays);
-                employeeAttendance.put(employees.get(i), days);
-
+            for (int i=0; i<noOfEmployees; i++) {
+                if(!employeeAttendance.containsKey(employees.get(i)))
+                {
+                    System.out.println("Employee Details:");
+                    System.out.println(employees.get(i).toString());
+                    System.out.println("Enter the number of working days for the employee:");
+                    noOfWorkingDays = sin.nextLine();
+                    days = checkValidDays(noOfWorkingDays);
+                    employeeAttendance.put(employees.get(i), days);
+                }
             }
         }
     }
@@ -70,25 +75,17 @@ public class AttendanceMaster{
                 System.out.println("Invalid Employee Id....Enter again");
             }
         }
-        if((updId - 1001) >= employees.size() || updId<1001)
+        if(updId<1001 || updId>=Employee.idCount)
         {
             System.out.println("Employee with ID "+updateId+" is not found!!");
         }
         else
         {
-            if(employeeAttendance.containsKey(employees.get(updId - 1001)))
-            {
                 System.out.println("Enter the number of working days for the employee:");
                 noOfWorkingDays = sin.nextLine();
                 days = checkValidDays(noOfWorkingDays);
                 employeeAttendance.put(employees.get(updId - 1001),days);
                 System.out.println("Attendance updated successfully!!");
-
-            }
-            else
-            {
-                System.out.println("Attendance not yet added for employee with ID"+updateId+" !!");
-            }
         }
     }
     public void showEligibleList()
@@ -108,6 +105,5 @@ public class AttendanceMaster{
                 }
             }
         }
-
     }
 }
