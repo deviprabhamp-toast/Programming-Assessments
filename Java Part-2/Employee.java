@@ -1,12 +1,11 @@
 import java.util.Scanner;
-
 public class Employee {
     private int empId;
     private String name;
     private String department;
     private String designation;
     private double salary;
-    private static int idCount = 1001;
+    static int idCount = 1001;
     Scanner sin = new Scanner(System.in);
 
     public Employee(String name, String department, String designation, double salary)
@@ -110,16 +109,15 @@ public class Employee {
     }
     public void setAllowance()
     {
-        double salaryBeforeAllowance = salary;
+        double salaryAfterAllowance;
         if(designation.compareTo("Manager") == 0)
         {
-            salary += (20 * salary / 100);
+            salaryAfterAllowance = salary + (20 * salary / 100);
         }
         else {
-            salary += (10 * salary / 100);
+            salaryAfterAllowance = salary + (10 * salary / 100);
         }
-        System.out.println("Salary after allowance: Rs. "+salary);
-        System.out.println("Difference in salary before and after allowance: Rs. "+String.format("%.2f",salary - salaryBeforeAllowance));
+        System.out.println("Allowance: Rs. "+String.format("%.2f",salaryAfterAllowance-salary));
+        System.out.println("Salary after allowance: Rs. "+salaryAfterAllowance);
     }
 }
-
