@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-public class Main {
+public class TestEmployee {
     static  AttendanceMaster attendance = new AttendanceMaster();
     public static void main(String[] args) {
         Scanner sin = new Scanner(System.in);
