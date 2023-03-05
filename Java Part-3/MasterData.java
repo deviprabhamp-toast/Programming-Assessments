@@ -41,6 +41,5 @@ public class MasterData {
             else
                 employees.sort((e1,e2) -> Double.compare(e2.getSalary(), e1.getSalary()));
         }
-
     }
 }
