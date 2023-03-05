@@ -5,6 +5,7 @@ public class TestEmployee {
     public static void main(String[] args) {
         Scanner sin = new Scanner(System.in);
         boolean filter = false;
+        int empAddCount=0,attCount=0;
         String name, designationNum, departmentNum, salary;
         String menuChoice;
         ArrayList<Employee> employeeList = new ArrayList<>();
@@ -35,12 +36,15 @@ public class TestEmployee {
                     employee.setSalary(salary);
                     employee.setAllowance();
                     employeeList.add(employee);
+                    empAddCount++;
                     break;
                 }
                 case "2": {
                     if(!employeeList.isEmpty()) {
                         attendance.enterAttendance(employeeList);
                         filter = false;
+                        empAddCount = 0;
+                        attCount = 0;
                     }
                     else
                         System.out.println("No employee details found to make attendance entry!!");
@@ -48,7 +52,11 @@ public class TestEmployee {
                 }
                 case "3": {
                     if(!employeeList.isEmpty()){
-                        attendance.updateAttendanceById(employeeList);
+                        attCount+=attendance.updateAttendanceById(employeeList);
+                        if(attCount == empAddCount){
+                            empAddCount = 0;
+                            attCount = 0;
+                        }
                         filter = false;
                     }
                     else
@@ -114,9 +122,12 @@ public class TestEmployee {
                         else {
                             if(attendance.isAttendanceEmpty())
                                 System.out.println("Attendance dictionary is empty!! No employee found to calculate salary..");
-                            else {
+                            if(empAddCount == attCount){
                                 SalCalculator calculator = new SalCalculator();
                                 calculator.calculateSalary(attendance.getAttendance());
+                            }
+                            else {
+                                System.out.println("Enter attendance for new added employees before salary calculation!!");
                             }
                         }
                     }
