@@ -2,6 +2,7 @@ import java.util.*;
 
 public class AttendanceMaster{
     private LinkedHashMap<Employee,Integer> employeeAttendance = new LinkedHashMap<>();
+    private ArrayList<Integer> filteredEmployees = new ArrayList<>();
     Scanner sin= new Scanner(System.in);
     public LinkedHashMap<Employee,Integer> getAttendance()
     {
@@ -44,26 +45,32 @@ public class AttendanceMaster{
         {
             System.out.println("Enter the employee attendance details:");
             for (int i=0; i<noOfEmployees; i++) {
-                if(!employeeAttendance.containsKey(employees.get(i)))
+                Employee employee1 = employees.get(i);
+
+                if(!employeeAttendance.containsKey(employee1))
                 {
-                    System.out.println();
-                    System.out.printf("| %-10s | %-20s | %-30s | %-20s | %-15s | %-15s |","ID","NAME","DEPARTMENT","DESIGNATION","SALARY","ALLOWANCE");
-                    System.out.println();
-                    System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
-                    System.out.println(employees.get(i).toString());
-                    System.out.println("Enter the number of working days for the employee:");
-                    noOfWorkingDays = sin.nextLine();
-                    days = checkValidDays(noOfWorkingDays);
-                    employeeAttendance.put(employees.get(i), days);
+                    if(!filteredEmployees.contains(employee1.getId())) {
+                        System.out.println();
+                        System.out.printf("| %-10s | %-20s | %-30s | %-20s | %-15s | %-15s |", "ID", "NAME", "DEPARTMENT", "DESIGNATION", "SALARY", "ALLOWANCE");
+                        System.out.println();
+                        System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
+                        System.out.println(employee1.toString());
+                        System.out.println("Enter the number of working days for the employee:");
+                        noOfWorkingDays = sin.nextLine();
+                        days = checkValidDays(noOfWorkingDays);
+                        employeeAttendance.put(employee1, days);
+                    }
                 }
             }
         }
     }
-    public void updateAttendanceById(ArrayList<Employee> employees)
+    public int updateAttendanceById(ArrayList<Employee> employees)
     {
+        int count=0;
         int updId;
         String noOfWorkingDays;
         int days;
+        int initialSize;
         System.out.println("Enter employee Id to update attendance");
         String updateId;
         while(true)
@@ -84,17 +91,22 @@ public class AttendanceMaster{
         }
         else
         {
+                initialSize = employeeAttendance.size();
                 System.out.println("Enter the number of working days for the employee:");
                 noOfWorkingDays = sin.nextLine();
                 days = checkValidDays(noOfWorkingDays);
                 for (Employee employee : employees) {
                     if (employee.getId() == updId) {
                         employeeAttendance.put(employee, days);
+                        if(filteredEmployees.contains(updId))
+                            filteredEmployees.remove(Integer.valueOf(updId));
+                        count = employeeAttendance.size()-initialSize;
                         System.out.println("Attendance updated successfully!!");
                         break;
                     }
                 }
         }
+        return count;
     }
     public void showEligibleList()
     {
@@ -130,6 +142,7 @@ public class AttendanceMaster{
             Employee employee = iterator1.next();
             if (employeeAttendance.get(employee) < 10) {
                 iterator1.remove();
+                filteredEmployees.add(employee.getId());
                 employeeAttendance.remove(employee);
             }
         }
