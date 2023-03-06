@@ -108,8 +108,12 @@ public class TestEmployee {
                     else if(attendance.isAttendanceEmpty())
                         System.out.println("Attendance dictionary is empty!! Cannot filter employees");
                     else {
-                        attendance.filterEmployeeList();
-                        filter = true;
+                        if(empAddCount == attCount) {
+                            attendance.filterEmployeeList();
+                            filter = true;
+                        }
+                        else
+                            System.out.println("Enter attendance for new added employees before filter!!");
                     }
                     break;
                 }
