@@ -12,7 +12,7 @@ public class TestEmployee {
         System.out.println("\t\t\t***********************************************************");
         System.out.println("\t\t\t\t\t\tPAYROLL MANAGEMENT SYSTEM");
         System.out.println("\t\t\t***********************************************************");
-        System.out.println("\t\t\t1 - Add Employee\n\t\t\t2 - Enter attendance\n\t\t\t3 - Update Attendance by Employee ID\n\t\t\t4 - Show employees eligible for salary\n\t\t\t5 - Sort employee list\n\t\t\t6 - Display employee details\n\t\t\t7 - Filter employees\n\t\t\t8 - Calculate salary for eligible employees\n\t\t\t\tPress any other key to EXIT\n\n\t\t\tEnter your choice:");
+        System.out.println("\t\t\t1 - Add Employee\n\t\t\t2 - Enter attendance\n\t\t\t3 - Update Attendance by Employee ID\n\t\t\t4 - Show employees eligible for salary\n\t\t\t5 - Sort employee list\n\t\t\t6 - Display employee details\n\t\t\t7 - Filter employees\n\t\t\t8 - Calculate salary for eligible employees\n\t\t\t\tPress any other key to EXIT\n\nEnter your choice:");
         menuChoice = sin.nextLine();
         while(menuChoice.matches("[1-8]"))
         {
@@ -92,7 +92,7 @@ public class TestEmployee {
                     else
                         System.out.println("No employee details found to sort!!");
                     break;
-                    }
+                }
                 case "6": {
                     if(!employeeList.isEmpty()) {
                         MasterData employeeData2 = new MasterData(employeeList);
@@ -138,7 +138,7 @@ public class TestEmployee {
             System.out.println("\t\t\t***********************************************************");
             System.out.println("\t\t\t\t\t\tPAYROLL MANAGEMENT SYSTEM");
             System.out.println("\t\t\t***********************************************************");
-            System.out.println("\t\t\t\t1 - Add Employee\n\t\t\t\t2 - Enter attendance\n\t\t\t\t3 - Update Attendance by Employee ID\n\t\t\t\t4 - Show employees eligible for salary\n\t\t\t\t5 - Sort employee list\n\t\t\t\t6 - Display employee details\n\t\t\t\t7 - Filter employees\n\t\t\t\t8 - Calculate salary for eligible employees\n\t\t\t\tPress any other key to EXIT\n\n\t\t\t\tEnter your choice:");
+            System.out.println("\t\t\t\t1 - Add Employee\n\t\t\t\t2 - Enter attendance\n\t\t\t\t3 - Update Attendance by Employee ID\n\t\t\t\t4 - Show employees eligible for salary\n\t\t\t\t5 - Sort employee list\n\t\t\t\t6 - Display employee details\n\t\t\t\t7 - Filter employees\n\t\t\t\t8 - Calculate salary for eligible employees\n\t\t\t\tPress any other key to EXIT\n\nEnter your choice:");
             menuChoice = sin.nextLine();
         }
     }
