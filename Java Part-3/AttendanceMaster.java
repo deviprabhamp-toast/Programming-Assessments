@@ -91,20 +91,22 @@ public class AttendanceMaster{
         }
         else
         {
-                initialSize = employeeAttendance.size();
-                System.out.println("Enter the number of working days for the employee:");
-                noOfWorkingDays = sin.nextLine();
-                days = checkValidDays(noOfWorkingDays);
-                for (Employee employee : employees) {
-                    if (employee.getId() == updId) {
-                        employeeAttendance.put(employee, days);
-                        if(filteredEmployees.contains(updId))
-                            filteredEmployees.remove(Integer.valueOf(updId));
-                        count = employeeAttendance.size()-initialSize;
-                        System.out.println("Attendance updated successfully!!");
-                        break;
+            initialSize = employeeAttendance.size();
+            System.out.println("Enter the number of working days for the employee:");
+            noOfWorkingDays = sin.nextLine();
+            days = checkValidDays(noOfWorkingDays);
+            for (Employee employee : employees) {
+                if (employee.getId() == updId) {
+                    employeeAttendance.put(employee, days);
+                    count = employeeAttendance.size()-initialSize;
+                    if(filteredEmployees.contains(updId)) {
+                        filteredEmployees.remove(Integer.valueOf(updId));
+                        count=0;
                     }
+                    System.out.println("Attendance updated successfully!!");
+                    break;
                 }
+            }
         }
         return count;
     }
